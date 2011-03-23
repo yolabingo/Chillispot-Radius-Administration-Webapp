@@ -12,5 +12,10 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-    (r'', include(admin.site.urls)),
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve', 
+        {'document_root': '/home/toddj/Envs/djtest/Chillispot-Radius-Administration-Webapp/static'}),
+    (r'^media/(?P<path>.*)$', 'django.views.static.serve', 
+        {'document_root': '/home/toddj/Envs/djtest/Chillispot-Radius-Administration-Webapp/media'}),
+    (r'^admin_tools/', include('admin_tools.urls')),
+    (r'^admin/', include(admin.site.urls)),
 )

@@ -79,4 +79,3 @@ class WifiUser(models.Model):
     class Meta:
         verbose_name = 'Wi-Fi User'
     
-    

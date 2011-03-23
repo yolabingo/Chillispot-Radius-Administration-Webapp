@@ -1,20 +1,14 @@
 from django.contrib import admin
-from chillispot-radius.models import  RadiusAttribute
-from chillispot-radius.models import  RadiusPassword
-from chillispot-radius.models import  RadiusSessionTimeout
-from chillispot-radius.models import  RadiusIdleLimit
-from chillispot-radius.models import  RadiusBandwidthUpLimit
-from chillispot-radius.models import  RadiusBandwidthDownLimit
-from chillispot-radius.models import  WifiUser
+from chillispot_radius.models import  RadiusAttribute
+from chillispot_radius.models import  RadiusPassword
+from chillispot_radius.models import  RadiusSessionTimeout
+from chillispot_radius.models import  RadiusIdleLimit
+from chillispot_radius.models import  RadiusBandwidthUpLimit
+from chillispot_radius.models import  RadiusBandwidthDownLimit
+from chillispot_radius.models import  WifiUser
 
 class WifiUserAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
-    """
-    Over-ride admin.ModelAdmin.save_model() to update radius attributes for this user.
-    When creating a new WifiUser, we have to create the Radius Attributes first.
-    Then, after saving [changes to] the WifiUser, we update the radius username and radius 
-    attribute value.
-    """
         if not change:
             # We need to create radcheck attributes when adding a new user
             new_attr = RadiusPassword()
@@ -45,5 +39,5 @@ class WifiUserAdmin(admin.ModelAdmin):
         obj.radius_limit_down.update_rad_value(obj.username, obj.limit_down)
 
 admin.site.register(WifiUser, WifiUserAdmin)
-admin.site.register(RadiusPassword)
-admin.site.register(RadiusSessionTimeout)
+# admin.site.register(RadiusPassword)
+# admin.site.register(RadiusSessionTimeout)
